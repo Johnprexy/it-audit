@@ -754,7 +754,7 @@
         <header class="header">
             <div class="logo-section">
                 <div class="logo-placeholder">
-                    <img src="bloomy logo.jpg" alt="Bloomy Technologies Logo" class="logo-image">
+                  <img src="bloomy logo.jpg" alt="Bloomy Technologies Logo" class="logo-image">
                 </div>
                 <h1 class="company-name">Bloomy Technologies</h1>
             </div>
@@ -792,7 +792,7 @@
                 <div class="flyer-placeholder">
                     <div style="text-align: center;">
                         <i class="fas fa-image" style="font-size: 3.5rem; margin-bottom: 20px; display: block; animation: pulse 2s infinite;"></i>
-                        <img src="/it audit.jpg" alt="IT Audit Course Flyer" class="flyer-image">
+                        <img src="it audit.jpg" alt="IT Audit Course Flyer" class="flyer-image">
                         <small style="opacity: 0.8;">(Recommended: 500x500px)</small>
                     </div>
                 </div>
@@ -957,7 +957,7 @@
             });
         });
 
-        // Enhanced loading animations
+        // Enhanced loading animations with mobile optimization
         window.addEventListener('load', () => {
             document.body.style.overflow = 'visible';
             
@@ -965,19 +965,46 @@
             document.querySelectorAll('.feature-card').forEach((card, index) => {
                 setTimeout(() => {
                     card.style.animation = `fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards`;
-                }, index * 200);
+                }, index * (isMobile ? 100 : 200));
             });
+            
+            // Mobile-specific optimizations
+            if (isMobile) {
+                // Optimize for mobile performance
+                document.body.style.transform = 'translateZ(0)'; // Enable hardware acceleration
+                
+                // Prevent zoom on input focus for iOS
+                const viewport = document.querySelector('meta[name="viewport"]');
+                if (viewport) {
+                    viewport.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no');
+                }
+            }
         });
 
-        // Smooth scrolling enhancement
-        document.documentElement.style.scrollBehavior = 'smooth';
+        // Smooth scrolling enhancement with mobile optimization
+        document.documentElement.style.scrollBehavior = isMobile ? 'auto' : 'smooth';
 
-        // Dynamic background color shifting
+        // Mobile-specific performance optimizations
+        if (isMobile) {
+            // Reduce animation complexity on mobile
+            document.documentElement.style.setProperty('--animation-duration', '0.3s');
+            
+            // Optimize touch scrolling for iOS
+            document.body.style.webkitOverflowScrolling = 'touch';
+            
+            // Prevent bounce scrolling on iOS
+            document.addEventListener('touchmove', function(e) {
+                if (e.scale !== 1) { e.preventDefault(); }
+            }, { passive: false });
+        }
+
+        // Dynamic background color shifting (reduced frequency on mobile)
         let hue = 0;
+        const shiftInterval = isMobile ? 200 : 100;
         setInterval(() => {
             hue = (hue + 1) % 360;
             document.documentElement.style.setProperty('--dynamic-hue', hue + 'deg');
-        }, 100);
+        }, shiftInterval);
 
         // Click tracking with visual feedback
         whatsappBtn.addEventListener('click', (e) => {
