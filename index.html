@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
@@ -19,7 +20,7 @@
             --glass-purple: rgba(139, 92, 246, 0.15);
             --glass-white: rgba(255, 255, 255, 0.15);
             --glass-white-strong: rgba(255, 255, 255, 0.25);
-            --text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+            --text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
             --animation-duration: 0.4s;
         }
 
@@ -48,19 +49,21 @@
             /* Samsung browser compatibility */
             -webkit-background-size: cover;
             background-size: cover;
-            background-attachment: scroll; /* Changed from fixed for Samsung */
+            background-attachment: scroll;
+            /* Changed from fixed for Samsung */
         }
 
         /* Advanced Background Pattern - Samsung S21 optimized */
         body::before {
             content: '';
-            position: absolute; /* Changed from fixed for Samsung browsers */
+            position: absolute;
+            /* Changed from fixed for Samsung browsers */
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             min-height: 100vh;
-            background: 
+            background:
                 radial-gradient(circle at 20% 50%, rgba(139, 92, 246, 0.15) 0%, transparent 60%),
                 radial-gradient(circle at 80% 20%, rgba(192, 132, 252, 0.15) 0%, transparent 60%),
                 radial-gradient(circle at 40% 80%, rgba(109, 40, 217, 0.15) 0%, transparent 60%);
@@ -69,24 +72,30 @@
         }
 
         .tech-grid {
-            position: absolute; /* Changed from fixed for Samsung compatibility */
+            position: absolute;
+            /* Changed from fixed for Samsung compatibility */
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             min-height: 100vh;
-            background-image: 
+            background-image:
                 linear-gradient(rgba(139, 92, 246, 0.08) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(139, 92, 246, 0.08) 1px, transparent 1px);
             background-size: 50px 50px;
             z-index: -1;
-            animation: gridMove 20s linear infinite;
+            /* animation: gridMove 20s linear infinite; */
             pointer-events: none;
         }
 
         @keyframes gridMove {
-            0% { transform: translate(0, 0); }
-            100% { transform: translate(50px, 50px); }
+            0% {
+                transform: translate(0, 0);
+            }
+
+            100% {
+                transform: translate(50px, 50px);
+            }
         }
 
         .container {
@@ -125,9 +134,10 @@
             font-size: 12px;
             text-align: center;
             transition: all var(--animation-duration) cubic-bezier(0.4, 0, 0.2, 1);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px); /* Safari/Samsung browser support */
-            box-shadow: 
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            /* Safari/Samsung browser support */
+            box-shadow:
                 0 8px 32px rgba(139, 92, 246, 0.4),
                 inset 0 1px 0 rgba(255, 255, 255, 0.3);
             position: relative;
@@ -149,7 +159,7 @@
         .logo-placeholder:hover,
         .logo-placeholder:active {
             transform: scale(1.1) rotateY(10deg);
-            box-shadow: 
+            box-shadow:
                 0 15px 40px rgba(139, 92, 246, 0.6),
                 inset 0 1px 0 rgba(255, 255, 255, 0.4);
         }
@@ -163,7 +173,7 @@
             padding: 10px;
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            box-shadow: 
+            box-shadow:
                 0 10px 35px rgba(139, 92, 246, 0.5),
                 inset 0 1px 0 rgba(255, 255, 255, 0.3);
             transition: transform var(--animation-duration) ease;
@@ -175,7 +185,8 @@
         }
 
         .company-name {
-            font-size: clamp(2rem, 5vw, 3rem); /* Responsive font size */
+            font-size: clamp(2rem, 5vw, 3rem);
+            /* Responsive font size */
             color: var(--pure-white);
             font-weight: 800;
             text-shadow: var(--text-shadow);
@@ -203,7 +214,8 @@
             gap: 30px;
             z-index: 2;
             /* Samsung browser optimization */
-            transform: translateZ(0); /* Force hardware acceleration */
+            transform: translateZ(0);
+            /* Force hardware acceleration */
             will-change: transform;
         }
 
@@ -221,7 +233,7 @@
             backdrop-filter: blur(15px);
             -webkit-backdrop-filter: blur(15px);
             animation: float 3s ease-in-out infinite;
-            box-shadow: 
+            box-shadow:
                 0 8px 25px rgba(139, 92, 246, 0.4),
                 inset 0 1px 0 rgba(255, 255, 255, 0.3);
             cursor: pointer;
@@ -232,18 +244,20 @@
             will-change: transform;
         }
 
-        .audit-icon:nth-child(1) { 
-            animation-delay: 0s; 
+        .audit-icon:nth-child(1) {
+            animation-delay: 0s;
             animation-name: float, pulse;
             animation-duration: 3s, 2s;
         }
-        .audit-icon:nth-child(2) { 
-            animation-delay: 1s; 
+
+        .audit-icon:nth-child(2) {
+            animation-delay: 1s;
             animation-name: float, rotate-icon;
             animation-duration: 3s, 4s;
         }
-        .audit-icon:nth-child(3) { 
-            animation-delay: 2s; 
+
+        .audit-icon:nth-child(3) {
+            animation-delay: 2s;
             animation-name: float, bounce-icon;
             animation-duration: 3s, 2.5s;
         }
@@ -252,7 +266,7 @@
         .audit-icon:active {
             transform: scale(1.2);
             background: rgba(255, 255, 255, 0.4);
-            box-shadow: 
+            box-shadow:
                 0 12px 35px rgba(139, 92, 246, 0.6),
                 inset 0 1px 0 rgba(255, 255, 255, 0.4);
         }
@@ -271,7 +285,8 @@
         }
 
         .main-title {
-            font-size: clamp(2.5rem, 6vw, 3.8rem); /* Responsive font size */
+            font-size: clamp(2.5rem, 6vw, 3.8rem);
+            /* Responsive font size */
             color: var(--pure-white);
             margin-bottom: 25px;
             font-weight: 900;
@@ -286,7 +301,8 @@
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
-            color: transparent; /* Fallback for browsers that don't support background-clip */
+            color: transparent;
+            /* Fallback for browsers that don't support background-clip */
             animation: gradientShift 3s ease-in-out infinite;
             position: relative;
             text-shadow: none;
@@ -308,12 +324,13 @@
         }
 
         .subtitle {
-            font-size: clamp(1.2rem, 3vw, 1.4rem); /* Responsive font size */
+            font-size: clamp(1.2rem, 3vw, 1.4rem);
+            /* Responsive font size */
             color: rgba(255, 255, 255, 0.95);
             margin-bottom: 35px;
             line-height: 1.6;
             max-width: 90%;
-            text-shadow: 1px 1px 5px rgba(0,0,0,0.3);
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
         }
 
         .limited-badge {
@@ -327,7 +344,7 @@
             font-weight: 700;
             margin-bottom: 40px;
             animation: pulseGlow 2s infinite;
-            box-shadow: 
+            box-shadow:
                 0 10px 30px rgba(255, 107, 107, 0.4),
                 inset 0 1px 0 rgba(255, 255, 255, 0.3);
             font-size: clamp(0.9rem, 2.5vw, 1.1rem);
@@ -335,7 +352,7 @@
             letter-spacing: 1px;
             position: relative;
             overflow: hidden;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
         }
 
         .limited-badge::before {
@@ -372,7 +389,7 @@
             transition: all var(--animation-duration) cubic-bezier(0.4, 0, 0.2, 1);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            box-shadow: 
+            box-shadow:
                 0 15px 40px rgba(139, 92, 246, 0.4),
                 inset 0 1px 0 rgba(255, 255, 255, 0.3);
             position: relative;
@@ -396,7 +413,7 @@
         .flyer-placeholder:hover,
         .flyer-placeholder:active {
             transform: scale(1.05) rotateY(5deg);
-            box-shadow: 
+            box-shadow:
                 0 25px 50px rgba(139, 92, 246, 0.6),
                 inset 0 1px 0 rgba(255, 255, 255, 0.4);
         }
@@ -433,7 +450,7 @@
             font-size: clamp(1.2rem, 3vw, 1.5rem);
             font-weight: 700;
             transition: all var(--animation-duration) cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 
+            box-shadow:
                 0 15px 40px rgba(37, 211, 102, 0.4),
                 inset 0 1px 0 rgba(255, 255, 255, 0.2);
             animation: bounceIn 1s ease-out 1s both;
@@ -441,9 +458,9 @@
             letter-spacing: 2px;
             position: relative;
             overflow: hidden;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
             /* Samsung touch optimization */
-            -webkit-tap-highlight-color: rgba(0,0,0,0);
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
             touch-action: manipulation;
         }
 
@@ -461,7 +478,7 @@
         .whatsapp-btn:hover,
         .whatsapp-btn:active {
             transform: translateY(-10px) scale(1.08);
-            box-shadow: 
+            box-shadow:
                 0 25px 60px rgba(37, 211, 102, 0.6),
                 inset 0 1px 0 rgba(255, 255, 255, 0.3);
             background-position: 100% 100%;
@@ -490,7 +507,7 @@
             transition: all var(--animation-duration) cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             overflow: hidden;
-            box-shadow: 
+            box-shadow:
                 0 10px 30px rgba(139, 92, 246, 0.3),
                 inset 0 1px 0 rgba(255, 255, 255, 0.3);
             /* Samsung optimization */
@@ -517,16 +534,27 @@
         .feature-card:hover,
         .feature-card:active {
             transform: translateY(-15px) rotateY(5deg);
-            box-shadow: 
+            box-shadow:
                 0 30px 60px rgba(139, 92, 246, 0.4),
                 inset 0 1px 0 rgba(255, 255, 255, 0.4);
             background: rgba(255, 255, 255, 0.2);
         }
 
-        .feature-card:nth-child(1) { animation-delay: 0.1s; }
-        .feature-card:nth-child(2) { animation-delay: 0.2s; }
-        .feature-card:nth-child(3) { animation-delay: 0.3s; }
-        .feature-card:nth-child(4) { animation-delay: 0.4s; }
+        .feature-card:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .feature-card:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .feature-card:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+
+        .feature-card:nth-child(4) {
+            animation-delay: 0.4s;
+        }
 
         .feature-card h3 {
             color: var(--pure-white);
@@ -545,7 +573,7 @@
             border-radius: 50%;
             font-size: 1.2rem;
             animation: iconSpin 4s linear infinite;
-            box-shadow: 
+            box-shadow:
                 0 5px 15px rgba(139, 92, 246, 0.4),
                 inset 0 1px 0 rgba(255, 255, 255, 0.3);
         }
@@ -562,7 +590,7 @@
             gap: 15px;
             font-size: 1.05rem;
             transition: all 0.3s ease;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
         }
 
         .feature-card li:hover,
@@ -590,7 +618,7 @@
             padding: 40px;
             border-radius: 25px;
             border: 2px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 
+            box-shadow:
                 0 15px 40px rgba(139, 92, 246, 0.4),
                 inset 0 1px 0 rgba(255, 255, 255, 0.3);
         }
@@ -611,15 +639,20 @@
             background: linear-gradient(45deg, var(--primary-purple), var(--accent-purple));
             border-radius: 50%;
             animation: iconBounce 3s ease-in-out infinite;
-            box-shadow: 
+            box-shadow:
                 0 5px 15px rgba(139, 92, 246, 0.4),
                 inset 0 1px 0 rgba(255, 255, 255, 0.3);
         }
 
         /* Advanced Animations */
         @keyframes rotate {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
         }
 
         @keyframes fadeInDown {
@@ -627,6 +660,7 @@
                 opacity: 0;
                 transform: translateY(-60px) rotateX(-30deg);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0) rotateX(0deg);
@@ -638,6 +672,7 @@
                 opacity: 0;
                 transform: translateY(60px) rotateX(30deg);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0) rotateX(0deg);
@@ -645,8 +680,13 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
         }
 
         @keyframes bounceIn {
@@ -654,13 +694,16 @@
                 opacity: 0;
                 transform: scale(0.3) translateY(50px) rotateY(-180deg);
             }
+
             50% {
                 opacity: 1;
                 transform: scale(1.1) translateY(-20px) rotateY(-90deg);
             }
+
             70% {
                 transform: scale(0.95) translateY(0) rotateY(-45deg);
             }
+
             100% {
                 opacity: 1;
                 transform: scale(1) translateY(0) rotateY(0deg);
@@ -668,105 +711,193 @@
         }
 
         @keyframes pulseGlow {
-            0%, 100% { 
+
+            0%,
+            100% {
                 transform: scale(1);
-                box-shadow: 
+                box-shadow:
                     0 10px 30px rgba(255, 107, 107, 0.4),
                     inset 0 1px 0 rgba(255, 255, 255, 0.3);
             }
-            50% { 
+
+            50% {
                 transform: scale(1.05);
-                box-shadow: 
+                box-shadow:
                     0 15px 40px rgba(255, 107, 107, 0.6),
                     inset 0 1px 0 rgba(255, 255, 255, 0.4);
             }
         }
 
         @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
         }
 
         @keyframes shimmer {
-            0%, 100% { opacity: 0.5; }
-            50% { opacity: 1; }
+
+            0%,
+            100% {
+                opacity: 0.5;
+            }
+
+            50% {
+                opacity: 1;
+            }
         }
 
         @keyframes sweep {
-            0% { left: -100%; }
-            100% { left: 100%; }
+            0% {
+                left: -100%;
+            }
+
+            100% {
+                left: 100%;
+            }
         }
 
         @keyframes slideShine {
-            0% { left: -100%; }
-            50% { left: 100%; }
-            100% { left: 100%; }
+            0% {
+                left: -100%;
+            }
+
+            50% {
+                left: 100%;
+            }
+
+            100% {
+                left: 100%;
+            }
         }
 
         @keyframes borderGlow {
-            0% { filter: hue-rotate(0deg); }
-            100% { filter: hue-rotate(360deg); }
+            0% {
+                filter: hue-rotate(0deg);
+            }
+
+            100% {
+                filter: hue-rotate(360deg);
+            }
         }
 
         @keyframes float {
-            0%, 100% { 
-                transform: translateY(0) rotateZ(0deg); 
+
+            0%,
+            100% {
+                transform: translateY(0) rotateZ(0deg);
             }
-            50% { 
-                transform: translateY(-20px) rotateZ(5deg); 
+
+            50% {
+                transform: translateY(-20px) rotateZ(5deg);
             }
         }
 
         @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
         }
 
         @keyframes rotate-icon {
-            0% { transform: rotateY(0deg); }
-            100% { transform: rotateY(360deg); }
+            0% {
+                transform: rotateY(0deg);
+            }
+
+            100% {
+                transform: rotateY(360deg);
+            }
         }
 
         @keyframes bounce-icon {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
         }
 
         @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-            40% { transform: translateY(-10px); }
-            60% { transform: translateY(-5px); }
+
+            0%,
+            20%,
+            50%,
+            80%,
+            100% {
+                transform: translateY(0);
+            }
+
+            40% {
+                transform: translateY(-10px);
+            }
+
+            60% {
+                transform: translateY(-5px);
+            }
         }
 
         @keyframes iconSpin {
-            0% { transform: rotateY(0deg); }
-            100% { transform: rotateY(360deg); }
+            0% {
+                transform: rotateY(0deg);
+            }
+
+            100% {
+                transform: rotateY(360deg);
+            }
         }
 
         @keyframes checkPulse {
-            0%, 100% { 
+
+            0%,
+            100% {
                 transform: scale(1);
                 filter: brightness(1);
             }
-            50% { 
+
+            50% {
                 transform: scale(1.2);
                 filter: brightness(1.5);
             }
         }
 
         @keyframes iconBounce {
-            0%, 100% { transform: translateY(0) scale(1); }
-            50% { transform: translateY(-5px) scale(1.1); }
+
+            0%,
+            100% {
+                transform: translateY(0) scale(1);
+            }
+
+            50% {
+                transform: translateY(-5px) scale(1.1);
+            }
         }
 
         /* Samsung S21 Specific Fixes */
         @media screen and (max-width: 1024px) and (min-width: 769px) {
+
             /* Samsung Galaxy S21 and similar tablets */
             body {
-                background-attachment: scroll; /* Fixed attachment issue */
+                background-attachment: scroll;
+                /* Fixed attachment issue */
             }
-            
+
             .hero-section {
                 grid-template-columns: 1fr;
                 text-align: center;
@@ -789,7 +920,8 @@
 
             .tech-grid {
                 background-size: 30px 30px;
-                position: absolute; /* Keep as absolute for better performance */
+                position: absolute;
+                /* Keep as absolute for better performance */
             }
         }
 
@@ -802,7 +934,8 @@
 
             body {
                 background: var(--purple-gradient);
-                background-attachment: scroll; /* Critical for Samsung browsers */
+                background-attachment: scroll;
+                /* Critical for Samsung browsers */
                 min-height: 100vh;
                 /* Samsung S21 specific optimizations */
                 -webkit-transform: translateZ(0);
@@ -812,26 +945,30 @@
             }
 
             body::before {
-                position: absolute; /* Absolute positioning for Samsung */
-                height: 200vh; /* Extended height for scroll */
+                position: absolute;
+                /* Absolute positioning for Samsung */
+                height: 200vh;
+                /* Extended height for scroll */
             }
 
             .tech-grid {
                 position: absolute;
-                height: 200vh; /* Extended height for scroll */
+                height: 200vh;
+                /* Extended height for scroll */
                 background-size: 25px 25px;
-                animation: none; /* Disable animation on Samsung S21 for performance */
+                animation: none;
+                /* Disable animation on Samsung S21 for performance */
             }
 
             .main-title {
                 font-size: 2.5rem;
                 /* Samsung text rendering fix */
-                -webkit-text-stroke: 0.5px rgba(255,255,255,0.1);
+                -webkit-text-stroke: 0.5px rgba(255, 255, 255, 0.1);
             }
 
             .company-name {
                 font-size: 2.5rem;
-                -webkit-text-stroke: 0.5px rgba(255,255,255,0.1);
+                -webkit-text-stroke: 0.5px rgba(255, 255, 255, 0.1);
             }
 
             .logo-section {
@@ -848,7 +985,7 @@
                 padding: 25px;
                 background: var(--glass-white-strong);
                 border: 2px solid rgba(255, 255, 255, 0.5);
-                box-shadow: 
+                box-shadow:
                     0 10px 30px rgba(139, 92, 246, 0.6),
                     inset 0 1px 0 rgba(255, 255, 255, 0.5);
                 /* Samsung S21 specific fixes */
@@ -915,7 +1052,7 @@
                 grid-template-columns: 1fr;
                 gap: 30px;
             }
-            
+
             .audit-icons {
                 position: relative;
                 flex-direction: row;
@@ -924,7 +1061,7 @@
                 justify-content: center;
                 margin: 15px 0;
             }
-            
+
             .main-title {
                 font-size: 2.2rem;
             }
@@ -954,7 +1091,7 @@
                 font-size: 1rem;
                 gap: 10px;
                 /* High DPI button optimization */
-                border: 1px solid rgba(255,255,255,0.2);
+                border: 1px solid rgba(255, 255, 255, 0.2);
             }
 
             .container {
@@ -965,7 +1102,7 @@
                 padding: 20px;
                 background: var(--glass-white-strong);
                 border: 3px solid rgba(255, 255, 255, 0.6);
-                box-shadow: 
+                box-shadow:
                     0 15px 35px rgba(139, 92, 246, 0.7),
                     inset 0 2px 0 rgba(255, 255, 255, 0.6);
             }
@@ -1016,18 +1153,18 @@
         @media screen and (-webkit-min-device-pixel-ratio: 2) {
             body {
                 /* Force GPU acceleration for Samsung Internet */
-                -webkit-transform: translate3d(0,0,0);
-                transform: translate3d(0,0,0);
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
             }
-            
+
             .feature-card,
             .audit-icon,
             .whatsapp-btn {
                 /* Prevent flickering on Samsung Internet */
                 -webkit-backface-visibility: hidden;
                 backface-visibility: hidden;
-                -webkit-transform: translate3d(0,0,0);
-                transform: translate3d(0,0,0);
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
             }
         }
 
@@ -1035,7 +1172,7 @@
         @media (prefers-contrast: high) {
             :root {
                 --glass-white-strong: rgba(255, 255, 255, 0.5);
-                --text-shadow: 3px 3px 10px rgba(0,0,0,0.9);
+                --text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.9);
             }
 
             .feature-card,
@@ -1050,6 +1187,7 @@
 
         /* Reduced motion for accessibility and Samsung optimization */
         @media (prefers-reduced-motion: reduce) {
+
             *,
             ::before,
             ::after {
@@ -1064,7 +1202,7 @@
             .tech-grid {
                 animation: none;
             }
-            
+
             /* Remove all complex animations for Samsung compatibility */
             .logo-placeholder::before,
             .flyer-placeholder::before,
@@ -1078,7 +1216,7 @@
         @media (prefers-color-scheme: dark) {
             :root {
                 --glass-white-strong: rgba(255, 255, 255, 0.3);
-                --text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
+                --text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
             }
         }
 
@@ -1090,8 +1228,32 @@
             transform: translateZ(0);
             will-change: transform;
         }
+
+        /* Performance optimization for desktop */
+        @media (min-width: 1024px) {
+            .tech-grid {
+                animation: none !important;
+            }
+
+            .feature-card,
+            .audit-icon,
+            .whatsapp-btn,
+            .logo-placeholder,
+            .flyer-placeholder {
+                backdrop-filter: blur(5px) !important;
+                -webkit-backdrop-filter: blur(5px) !important;
+            }
+
+            /* Simplify complex animations */
+            .highlight::after,
+            .logo-placeholder::before,
+            .flyer-placeholder::before {
+                display: none !important;
+            }
+        }
     </style>
 </head>
+
 <body>
     <div class="tech-grid"></div>
 
@@ -1099,7 +1261,8 @@
         <header class="header">
             <div class="logo-section">
                 <div class="logo-placeholder">
-                  <img src="bloomy logo.jpg" alt="Bloomy Technologies Logo" class="logo-image" onerror="this.style.display='none'; this.parentNode.innerHTML='<div style=\'text-align: center; color: white; text-shadow: 2px 2px 5px rgba(0,0,0,0.5);\'><i class=\'fas fa-building\' style=\'font-size: 2rem; margin-bottom: 10px; display: block;\'></i>Bloomy<br>Logo</div>';">
+                    <img src="bloomy logo.jpg" alt="Bloomy Technologies Logo" class="logo-image"
+                        onerror="this.style.display='none'; this.parentNode.innerHTML='<div style=\'text-align: center; color: white; text-shadow: 2px 2px 5px rgba(0,0,0,0.5);\'><i class=\'fas fa-building\' style=\'font-size: 2rem; margin-bottom: 10px; display: block;\'></i>Bloomy<br>Logo</div>';">
                 </div>
                 <h1 class="company-name">Bloomy Technologies</h1>
             </div>
@@ -1125,10 +1288,11 @@
                     <span class="highlight">IT Audit</span>
                 </h2>
                 <p class="subtitle">
-                    Master cutting-edge IT audit skills with advanced compliance frameworks, risk management, and security protocols. Transform into a certified IT audit professional.
+                    Master cutting-edge IT audit skills with advanced compliance frameworks, risk management, and
+                    security protocols. Transform into a certified IT audit professional.
                 </p>
                 <div class="limited-badge">
-                    <i class="fas fa-fire"></i> 
+                    <i class="fas fa-fire"></i>
                     Limited Slots Available
                 </div>
             </div>
@@ -1136,17 +1300,16 @@
             <div class="flyer-container">
                 <div class="flyer-placeholder">
                     <div style="text-align: center;">
-                        <img src="it audit.jpg" alt="IT Audit Course Flyer" class="flyer-image" onerror="this.style.display='none'; this.parentNode.innerHTML='<div style=\'text-align: center; color: white; text-shadow: 2px 2px 5px rgba(0,0,0,0.5);\'><i class=\'fas fa-image\' style=\'font-size: 3.5rem; margin-bottom: 20px; display: block; animation: pulse 2s infinite;\'></i>IT Audit Course<br><small style=\'opacity: 0.8;\'>(Flyer Image)</small></div>';">
+                        <img src="it audit.jpg" alt="IT Audit Course Flyer" class="flyer-image"
+                            onerror="this.style.display='none'; this.parentNode.innerHTML='<div style=\'text-align: center; color: white; text-shadow: 2px 2px 5px rgba(0,0,0,0.5);\'><i class=\'fas fa-image\' style=\'font-size: 3.5rem; margin-bottom: 20px; display: block; animation: pulse 2s infinite;\'></i>IT Audit Course<br><small style=\'opacity: 0.8;\'>(Flyer Image)</small></div>';">
                     </div>
                 </div>
             </div>
         </section>
 
         <section class="whatsapp-section">
-            <a href="https://chat.whatsapp.com/D8CGFeDfSM44ALuXYsbXkn?mode=ems_wa_t" 
-               class="whatsapp-btn" 
-               target="_blank"
-               rel="noopener noreferrer">
+            <a href="https://chat.whatsapp.com/D8CGFeDfSM44ALuXYsbXkn?mode=ems_wa_t" class="whatsapp-btn"
+                target="_blank" rel="noopener noreferrer">
                 <i class="fab fa-whatsapp"></i>
                 Join WhatsApp Group Now!
             </a>
@@ -1206,6 +1369,20 @@
             <p><i class="fas fa-phone"></i> +1 (502) 650-6210</p>
             <p><i class="fas fa-globe"></i> www.bloomy-technologies.com</p>
         </footer>
+        <!-- Final Call-to-Action WhatsApp Section -->
+        <section class="whatsapp-section final-cta">
+            <h3
+                style="color: var(--pure-white); font-size: clamp(1.5rem, 4vw, 2rem); margin-bottom: 20px; text-shadow: var(--text-shadow); font-weight: 700;">
+                Ready to Transform Your Career?</h3>
+            <p
+                style="color: rgba(255, 255, 255, 0.9); font-size: clamp(1rem, 2.5vw, 1.2rem); margin-bottom: 30px; text-shadow: 1px 1px 3px rgba(0,0,0,0.3);">
+                Join our exclusive IT Audit community now and start your journey to success!</p>
+            <a href="https://chat.whatsapp.com/D8CGFeDfSM44ALuXYsbXkn?mode=ems_wa_t" class="whatsapp-btn"
+                target="_blank" rel="noopener noreferrer">
+                <i class="fab fa-whatsapp"></i>
+                Join WhatsApp Group Now!
+            </a>
+        </section>
     </div>
 
     <script>
@@ -1219,22 +1396,22 @@
         if (isSamsung || isSamsungInternet) {
             // Disable complex animations for Samsung devices
             document.documentElement.style.setProperty('--animation-duration', '0.2s');
-            
+
             // Force hardware acceleration
             document.body.style.webkitTransform = 'translate3d(0,0,0)';
             document.body.style.transform = 'translate3d(0,0,0)';
-            
+
             // Optimize touch scrolling
             document.body.style.webkitOverflowScrolling = 'touch';
             document.body.style.touchAction = 'pan-y';
-            
+
             // Disable moving grid animation
             const techGrid = document.querySelector('.tech-grid');
             if (techGrid) {
                 techGrid.style.animation = 'none';
                 techGrid.style.backgroundSize = '25px 25px';
             }
-            
+
             // Simplify backdrop filters for performance
             const elements = document.querySelectorAll('.feature-card, .audit-icon, .contact-info, .flyer-placeholder, .logo-placeholder, .whatsapp-btn');
             elements.forEach(el => {
@@ -1266,7 +1443,7 @@
 
         // WhatsApp button interactions - Samsung optimized
         const whatsappBtn = document.querySelector('.whatsapp-btn');
-        
+
         if (!isSamsung && !isMobile) {
             whatsappBtn.addEventListener('mouseenter', () => {
                 whatsappBtn.style.transform = 'translateY(-10px) scale(1.08)';
@@ -1282,10 +1459,10 @@
         // Samsung-friendly particle system (disabled)
         function createAdvancedParticle(x, y) {
             if (isSamsung || isMobile) return; // Skip particles on Samsung/mobile
-            
+
             const colors = ['#25D366', '#4ECDC4', '#45B7D1', '#96CEB4'];
             const particle = document.createElement('div');
-            
+
             particle.style.position = 'fixed';
             particle.style.left = x + 'px';
             particle.style.top = y + 'px';
@@ -1296,7 +1473,7 @@
             particle.style.pointerEvents = 'none';
             particle.style.animation = 'particleFloat 1s ease-out forwards';
             particle.style.zIndex = '1000';
-            
+
             document.body.appendChild(particle);
             setTimeout(() => particle.remove(), 1000);
         }
@@ -1314,7 +1491,7 @@
                 icon.addEventListener('touchstart', () => {
                     handleInteraction(1.1, 'rgba(255, 255, 255, 0.4)');
                 }, { passive: true });
-                
+
                 icon.addEventListener('touchend', () => {
                     handleInteraction(1, 'var(--glass-white-strong)');
                 }, { passive: true });
@@ -1322,7 +1499,7 @@
                 icon.addEventListener('mouseenter', () => {
                     handleInteraction(1.2, 'rgba(255, 255, 255, 0.3)');
                 });
-                
+
                 icon.addEventListener('mouseleave', () => {
                     handleInteraction(1, 'var(--glass-white-strong)');
                 });
@@ -1332,7 +1509,7 @@
         // Samsung-optimized loading animations
         window.addEventListener('load', () => {
             document.body.style.overflow = 'visible';
-            
+
             if (!isSamsung) {
                 document.querySelectorAll('.feature-card').forEach((card, index) => {
                     setTimeout(() => {
@@ -1345,7 +1522,7 @@
         // Samsung-optimized scrolling
         if (isSamsung) {
             document.documentElement.style.scrollBehavior = 'auto';
-            
+
             // Prevent zoom on double tap
             let lastTouchEnd = 0;
             document.addEventListener('touchend', function (event) {
@@ -1360,12 +1537,12 @@
         // Click tracking with Samsung-friendly ripple effect
         whatsappBtn.addEventListener('click', (e) => {
             if (isSamsung) return; // Skip ripple on Samsung for performance
-            
+
             const ripple = document.createElement('div');
             const rect = whatsappBtn.getBoundingClientRect();
             const x = e.clientX - rect.left;
             const y = e.clientY - rect.top;
-            
+
             ripple.style.cssText = `
                 position: absolute;
                 left: ${x}px;
@@ -1378,16 +1555,16 @@
                 animation: ripple 0.4s ease-out;
                 pointer-events: none;
             `;
-            
+
             whatsappBtn.style.position = 'relative';
             whatsappBtn.appendChild(ripple);
-            
+
             setTimeout(() => ripple.remove(), 400);
         });
 
         // Samsung-specific error handling
         document.querySelectorAll('img').forEach(img => {
-            img.addEventListener('error', function() {
+            img.addEventListener('error', function () {
                 this.style.display = 'none';
                 const placeholder = this.closest('.logo-placeholder, .flyer-placeholder');
                 if (placeholder) {
@@ -1404,14 +1581,14 @@
         if (isSamsung && 'performance' in window) {
             let frameCount = 0;
             let lastTime = performance.now();
-            
+
             function checkPerformance() {
                 frameCount++;
                 const currentTime = performance.now();
-                
+
                 if (currentTime - lastTime >= 1000) {
                     const fps = Math.round((frameCount * 1000) / (currentTime - lastTime));
-                    
+
                     if (fps < 30) {
                         // Further reduce animations if performance is poor
                         document.querySelectorAll('*').forEach(el => {
@@ -1419,14 +1596,14 @@
                             el.style.transitionDuration = '0.1s';
                         });
                     }
-                    
+
                     frameCount = 0;
                     lastTime = currentTime;
                 }
-                
+
                 requestAnimationFrame(checkPerformance);
             }
-            
+
             requestAnimationFrame(checkPerformance);
         }
 
@@ -1492,4 +1669,5 @@
         });
     </script>
 </body>
+
 </html>
