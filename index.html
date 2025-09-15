@@ -30,27 +30,36 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
             background: var(--purple-gradient);
             min-height: 100vh;
             overflow-x: hidden;
             position: relative;
+            /* Samsung S21 specific fixes */
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
         }
 
-        /* Ensure background always shows on all devices */
+        /* Ensure background always shows on all devices - FIXED */
         html {
             background: var(--purple-gradient);
             min-height: 100vh;
+            /* Samsung browser compatibility */
+            -webkit-background-size: cover;
+            background-size: cover;
+            background-attachment: scroll; /* Changed from fixed for Samsung */
         }
 
-        /* Advanced Background Pattern - Fixed for mobile */
+        /* Advanced Background Pattern - Samsung S21 optimized */
         body::before {
             content: '';
-            position: fixed;
+            position: absolute; /* Changed from fixed for Samsung browsers */
             top: 0;
             left: 0;
             width: 100%;
-            height: 100vh;
+            height: 100%;
+            min-height: 100vh;
             background: 
                 radial-gradient(circle at 20% 50%, rgba(139, 92, 246, 0.15) 0%, transparent 60%),
                 radial-gradient(circle at 80% 20%, rgba(192, 132, 252, 0.15) 0%, transparent 60%),
@@ -60,11 +69,12 @@
         }
 
         .tech-grid {
-            position: fixed;
+            position: absolute; /* Changed from fixed for Samsung compatibility */
             top: 0;
             left: 0;
             width: 100%;
-            height: 100vh;
+            height: 100%;
+            min-height: 100vh;
             background-image: 
                 linear-gradient(rgba(139, 92, 246, 0.08) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(139, 92, 246, 0.08) 1px, transparent 1px);
@@ -116,6 +126,7 @@
             text-align: center;
             transition: all var(--animation-duration) cubic-bezier(0.4, 0, 0.2, 1);
             backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px); /* Safari/Samsung browser support */
             box-shadow: 
                 0 8px 32px rgba(139, 92, 246, 0.4),
                 inset 0 1px 0 rgba(255, 255, 255, 0.3);
@@ -135,7 +146,8 @@
             z-index: -1;
         }
 
-        .logo-placeholder:hover {
+        .logo-placeholder:hover,
+        .logo-placeholder:active {
             transform: scale(1.1) rotateY(10deg);
             box-shadow: 
                 0 15px 40px rgba(139, 92, 246, 0.6),
@@ -150,18 +162,20 @@
             background: var(--glass-white-strong);
             padding: 10px;
             backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             box-shadow: 
                 0 10px 35px rgba(139, 92, 246, 0.5),
                 inset 0 1px 0 rgba(255, 255, 255, 0.3);
             transition: transform var(--animation-duration) ease;
         }
 
-        .logo-image:hover {
+        .logo-image:hover,
+        .logo-image:active {
             transform: scale(1.1) rotateY(10deg);
         }
 
         .company-name {
-            font-size: 3rem;
+            font-size: clamp(2rem, 5vw, 3rem); /* Responsive font size */
             color: var(--pure-white);
             font-weight: 800;
             text-shadow: var(--text-shadow);
@@ -179,7 +193,7 @@
             animation: shimmer 2s ease-in-out infinite;
         }
 
-        /* IT Audit Animated Icons - Fixed positioning */
+        /* IT Audit Animated Icons - Samsung S21 optimized */
         .audit-icons {
             position: absolute;
             top: 20%;
@@ -188,6 +202,9 @@
             flex-direction: column;
             gap: 30px;
             z-index: 2;
+            /* Samsung browser optimization */
+            transform: translateZ(0); /* Force hardware acceleration */
+            will-change: transform;
         }
 
         .audit-icon {
@@ -202,6 +219,7 @@
             color: var(--pure-white);
             font-size: 24px;
             backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
             animation: float 3s ease-in-out infinite;
             box-shadow: 
                 0 8px 25px rgba(139, 92, 246, 0.4),
@@ -209,6 +227,9 @@
             cursor: pointer;
             transition: all 0.3s ease;
             text-shadow: var(--text-shadow);
+            /* Samsung optimization */
+            transform: translateZ(0);
+            will-change: transform;
         }
 
         .audit-icon:nth-child(1) { 
@@ -227,7 +248,8 @@
             animation-duration: 3s, 2.5s;
         }
 
-        .audit-icon:hover {
+        .audit-icon:hover,
+        .audit-icon:active {
             transform: scale(1.2);
             background: rgba(255, 255, 255, 0.4);
             box-shadow: 
@@ -249,7 +271,7 @@
         }
 
         .main-title {
-            font-size: 3.8rem;
+            font-size: clamp(2.5rem, 6vw, 3.8rem); /* Responsive font size */
             color: var(--pure-white);
             margin-bottom: 25px;
             font-weight: 900;
@@ -262,11 +284,12 @@
             background: linear-gradient(45deg, #FF6B6B, #4ECDC4, #45B7D1, #96CEB4);
             background-size: 300% 300%;
             -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
             background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent; /* Fallback for browsers that don't support background-clip */
             animation: gradientShift 3s ease-in-out infinite;
             position: relative;
-            text-shadow: none; /* Remove text-shadow for gradient text */
+            text-shadow: none;
         }
 
         .highlight::after {
@@ -285,7 +308,7 @@
         }
 
         .subtitle {
-            font-size: 1.4rem;
+            font-size: clamp(1.2rem, 3vw, 1.4rem); /* Responsive font size */
             color: rgba(255, 255, 255, 0.95);
             margin-bottom: 35px;
             line-height: 1.6;
@@ -307,7 +330,7 @@
             box-shadow: 
                 0 10px 30px rgba(255, 107, 107, 0.4),
                 inset 0 1px 0 rgba(255, 255, 255, 0.3);
-            font-size: 1.1rem;
+            font-size: clamp(0.9rem, 2.5vw, 1.1rem);
             text-transform: uppercase;
             letter-spacing: 1px;
             position: relative;
@@ -348,6 +371,7 @@
             text-align: center;
             transition: all var(--animation-duration) cubic-bezier(0.4, 0, 0.2, 1);
             backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             box-shadow: 
                 0 15px 40px rgba(139, 92, 246, 0.4),
                 inset 0 1px 0 rgba(255, 255, 255, 0.3);
@@ -369,7 +393,8 @@
             animation: borderGlow 3s linear infinite;
         }
 
-        .flyer-placeholder:hover {
+        .flyer-placeholder:hover,
+        .flyer-placeholder:active {
             transform: scale(1.05) rotateY(5deg);
             box-shadow: 
                 0 25px 50px rgba(139, 92, 246, 0.6),
@@ -384,7 +409,8 @@
             transition: transform var(--animation-duration) cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .flyer-image:hover {
+        .flyer-image:hover,
+        .flyer-image:active {
             transform: scale(1.05) rotateY(5deg);
         }
 
@@ -404,7 +430,7 @@
             padding: 25px 55px;
             border-radius: 60px;
             text-decoration: none;
-            font-size: 1.5rem;
+            font-size: clamp(1.2rem, 3vw, 1.5rem);
             font-weight: 700;
             transition: all var(--animation-duration) cubic-bezier(0.4, 0, 0.2, 1);
             box-shadow: 
@@ -416,6 +442,9 @@
             position: relative;
             overflow: hidden;
             text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+            /* Samsung touch optimization */
+            -webkit-tap-highlight-color: rgba(0,0,0,0);
+            touch-action: manipulation;
         }
 
         .whatsapp-btn::before {
@@ -429,7 +458,8 @@
             animation: slideShine 3s infinite;
         }
 
-        .whatsapp-btn:hover {
+        .whatsapp-btn:hover,
+        .whatsapp-btn:active {
             transform: translateY(-10px) scale(1.08);
             box-shadow: 
                 0 25px 60px rgba(37, 211, 102, 0.6),
@@ -452,6 +482,7 @@
         .feature-card {
             background: var(--glass-white-strong);
             backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border-radius: 25px;
             padding: 35px;
             border: 2px solid rgba(255, 255, 255, 0.3);
@@ -462,6 +493,9 @@
             box-shadow: 
                 0 10px 30px rgba(139, 92, 246, 0.3),
                 inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            /* Samsung optimization */
+            transform: translateZ(0);
+            will-change: transform;
         }
 
         .feature-card::before {
@@ -475,11 +509,13 @@
             transition: left 0.6s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .feature-card:hover::before {
+        .feature-card:hover::before,
+        .feature-card:active::before {
             left: 100%;
         }
 
-        .feature-card:hover {
+        .feature-card:hover,
+        .feature-card:active {
             transform: translateY(-15px) rotateY(5deg);
             box-shadow: 
                 0 30px 60px rgba(139, 92, 246, 0.4),
@@ -494,7 +530,7 @@
 
         .feature-card h3 {
             color: var(--pure-white);
-            font-size: 1.5rem;
+            font-size: clamp(1.3rem, 3vw, 1.5rem);
             margin-bottom: 20px;
             display: flex;
             align-items: center;
@@ -529,7 +565,8 @@
             text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
         }
 
-        .feature-card li:hover {
+        .feature-card li:hover,
+        .feature-card li:active {
             transform: translateX(10px);
             color: var(--pure-white);
         }
@@ -549,6 +586,7 @@
             animation: fadeIn 1s ease-out 1.2s both;
             background: var(--glass-white-strong);
             backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             padding: 40px;
             border-radius: 25px;
             border: 2px solid rgba(255, 255, 255, 0.3);
@@ -559,7 +597,7 @@
 
         .contact-info p {
             margin: 20px 0;
-            font-size: 1.3rem;
+            font-size: clamp(1.1rem, 3vw, 1.3rem);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -722,12 +760,13 @@
             50% { transform: translateY(-5px) scale(1.1); }
         }
 
-        /* Responsive Design - FIXED */
-        @media (max-width: 1024px) {
-            :root {
-                --animation-duration: 0.3s;
+        /* Samsung S21 Specific Fixes */
+        @media screen and (max-width: 1024px) and (min-width: 769px) {
+            /* Samsung Galaxy S21 and similar tablets */
+            body {
+                background-attachment: scroll; /* Fixed attachment issue */
             }
-
+            
             .hero-section {
                 grid-template-columns: 1fr;
                 text-align: center;
@@ -748,29 +787,51 @@
                 font-size: 3.2rem;
             }
 
-            /* Ensure background visibility on tablets */
             .tech-grid {
                 background-size: 30px 30px;
+                position: absolute; /* Keep as absolute for better performance */
             }
         }
 
-        @media (max-width: 768px) {
+        /* Samsung S21 Portrait Mode - CRITICAL FIXES */
+        @media screen and (max-width: 768px) and (min-device-width: 360px) {
             :root {
-                --glass-white: rgba(255, 255, 255, 0.2);
-                --glass-white-strong: rgba(255, 255, 255, 0.3);
+                --glass-white: rgba(255, 255, 255, 0.3);
+                --glass-white-strong: rgba(255, 255, 255, 0.4);
             }
 
             body {
                 background: var(--purple-gradient);
-                background-attachment: fixed;
+                background-attachment: scroll; /* Critical for Samsung browsers */
+                min-height: 100vh;
+                /* Samsung S21 specific optimizations */
+                -webkit-transform: translateZ(0);
+                transform: translateZ(0);
+                backface-visibility: hidden;
+                perspective: 1000px;
+            }
+
+            body::before {
+                position: absolute; /* Absolute positioning for Samsung */
+                height: 200vh; /* Extended height for scroll */
+            }
+
+            .tech-grid {
+                position: absolute;
+                height: 200vh; /* Extended height for scroll */
+                background-size: 25px 25px;
+                animation: none; /* Disable animation on Samsung S21 for performance */
             }
 
             .main-title {
                 font-size: 2.5rem;
+                /* Samsung text rendering fix */
+                -webkit-text-stroke: 0.5px rgba(255,255,255,0.1);
             }
 
             .company-name {
                 font-size: 2.5rem;
+                -webkit-text-stroke: 0.5px rgba(255,255,255,0.1);
             }
 
             .logo-section {
@@ -785,80 +846,115 @@
 
             .feature-card {
                 padding: 25px;
-                /* Enhanced visibility on mobile */
                 background: var(--glass-white-strong);
-                border: 2px solid rgba(255, 255, 255, 0.4);
+                border: 2px solid rgba(255, 255, 255, 0.5);
                 box-shadow: 
-                    0 10px 30px rgba(139, 92, 246, 0.5),
-                    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+                    0 10px 30px rgba(139, 92, 246, 0.6),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+                /* Samsung S21 specific fixes */
+                will-change: transform;
+                -webkit-transform: translateZ(0);
+                transform: translateZ(0);
             }
 
             .whatsapp-btn {
                 padding: 20px 40px;
                 font-size: 1.2rem;
+                /* Samsung touch optimization */
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                user-select: none;
             }
 
             .audit-icons {
                 gap: 20px;
+                /* Samsung positioning fix */
+                position: relative;
+                top: auto;
+                right: auto;
+                flex-direction: row;
+                justify-content: center;
+                margin: 20px 0;
             }
 
             .audit-icon {
                 width: 50px;
                 height: 50px;
                 font-size: 20px;
-                /* Enhanced visibility on mobile */
                 background: var(--glass-white-strong);
-                border: 2px solid rgba(255, 255, 255, 0.4);
+                border: 2px solid rgba(255, 255, 255, 0.5);
+                /* Samsung performance optimization */
+                will-change: transform;
+                -webkit-transform: translateZ(0);
+                transform: translateZ(0);
             }
 
             .contact-info {
-                /* Enhanced visibility on mobile */
                 background: var(--glass-white-strong);
-                border: 2px solid rgba(255, 255, 255, 0.4);
+                border: 2px solid rgba(255, 255, 255, 0.5);
             }
 
             .flyer-placeholder {
-                /* Enhanced visibility on mobile */
                 background: var(--glass-white-strong);
-                border: 2px solid rgba(255, 255, 255, 0.4);
+                border: 2px solid rgba(255, 255, 255, 0.5);
             }
 
             .logo-placeholder {
-                /* Enhanced visibility on mobile */
                 background: var(--glass-white-strong);
-                border: 2px solid rgba(255, 255, 255, 0.4);
+                border: 2px solid rgba(255, 255, 255, 0.5);
             }
 
             .logo-image {
-                /* Enhanced visibility on mobile */
                 background: var(--glass-white-strong);
-            }
-
-            /* Reduce animation complexity on mobile */
-            .tech-grid {
-                animation: none;
-                background-size: 25px 25px;
             }
         }
 
-        @media (max-width: 480px) {
+        /* Samsung S21 Landscape Mode */
+        @media screen and (max-height: 480px) and (min-width: 600px) {
+            .hero-section {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .audit-icons {
+                position: relative;
+                flex-direction: row;
+                top: auto;
+                right: auto;
+                justify-content: center;
+                margin: 15px 0;
+            }
+            
+            .main-title {
+                font-size: 2.2rem;
+            }
+        }
+
+        /* Samsung S21 Ultra specific fixes */
+        @media screen and (max-width: 480px) and (min-device-pixel-ratio: 3) {
             :root {
-                --glass-white: rgba(255, 255, 255, 0.25);
-                --glass-white-strong: rgba(255, 255, 255, 0.35);
+                --glass-white: rgba(255, 255, 255, 0.35);
+                --glass-white-strong: rgba(255, 255, 255, 0.45);
             }
 
             .main-title {
                 font-size: 2rem;
+                /* High DPI text rendering */
+                -webkit-font-smoothing: subpixel-antialiased;
+                -moz-osx-font-smoothing: auto;
             }
 
             .company-name {
                 font-size: 2rem;
+                -webkit-font-smoothing: subpixel-antialiased;
             }
 
             .whatsapp-btn {
                 padding: 15px 30px;
                 font-size: 1rem;
                 gap: 10px;
+                /* High DPI button optimization */
+                border: 1px solid rgba(255,255,255,0.2);
             }
 
             .container {
@@ -867,28 +963,25 @@
 
             .feature-card {
                 padding: 20px;
-                /* Maximum visibility on small mobile */
                 background: var(--glass-white-strong);
-                border: 3px solid rgba(255, 255, 255, 0.5);
+                border: 3px solid rgba(255, 255, 255, 0.6);
                 box-shadow: 
-                    0 15px 35px rgba(139, 92, 246, 0.6),
-                    inset 0 2px 0 rgba(255, 255, 255, 0.5);
+                    0 15px 35px rgba(139, 92, 246, 0.7),
+                    inset 0 2px 0 rgba(255, 255, 255, 0.6);
             }
 
             .audit-icon {
                 width: 45px;
                 height: 45px;
                 font-size: 18px;
-                /* Maximum visibility on small mobile */
                 background: var(--glass-white-strong);
-                border: 3px solid rgba(255, 255, 255, 0.5);
+                border: 3px solid rgba(255, 255, 255, 0.6);
             }
 
             .contact-info {
                 padding: 30px 20px;
-                /* Maximum visibility on small mobile */
                 background: var(--glass-white-strong);
-                border: 3px solid rgba(255, 255, 255, 0.5);
+                border: 3px solid rgba(255, 255, 255, 0.6);
             }
 
             .contact-info p {
@@ -907,21 +1000,42 @@
                 max-width: 100%;
             }
 
-            /* Disable complex animations on very small screens */
-            .feature-card:hover {
+            /* Simplified animations for better performance */
+            .feature-card:hover,
+            .feature-card:active {
                 transform: translateY(-5px);
             }
 
-            .whatsapp-btn:hover {
+            .whatsapp-btn:hover,
+            .whatsapp-btn:active {
                 transform: translateY(-5px) scale(1.02);
+            }
+        }
+
+        /* Samsung Internet Browser Specific Fixes */
+        @media screen and (-webkit-min-device-pixel-ratio: 2) {
+            body {
+                /* Force GPU acceleration for Samsung Internet */
+                -webkit-transform: translate3d(0,0,0);
+                transform: translate3d(0,0,0);
+            }
+            
+            .feature-card,
+            .audit-icon,
+            .whatsapp-btn {
+                /* Prevent flickering on Samsung Internet */
+                -webkit-backface-visibility: hidden;
+                backface-visibility: hidden;
+                -webkit-transform: translate3d(0,0,0);
+                transform: translate3d(0,0,0);
             }
         }
 
         /* High contrast mode for better visibility */
         @media (prefers-contrast: high) {
             :root {
-                --glass-white-strong: rgba(255, 255, 255, 0.4);
-                --text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
+                --glass-white-strong: rgba(255, 255, 255, 0.5);
+                --text-shadow: 3px 3px 10px rgba(0,0,0,0.9);
             }
 
             .feature-card,
@@ -929,12 +1043,12 @@
             .contact-info,
             .flyer-placeholder,
             .logo-placeholder {
-                border: 3px solid rgba(255, 255, 255, 0.6);
+                border: 3px solid rgba(255, 255, 255, 0.7);
                 background: var(--glass-white-strong);
             }
         }
 
-        /* Reduced motion for accessibility */
+        /* Reduced motion for accessibility and Samsung optimization */
         @media (prefers-reduced-motion: reduce) {
             *,
             ::before,
@@ -942,13 +1056,39 @@
                 animation-delay: -1ms !important;
                 animation-duration: 1ms !important;
                 animation-iteration-count: 1 !important;
-                background-attachment: initial !important;
+                background-attachment: scroll !important;
                 scroll-behavior: auto !important;
+                transition-duration: 0.01ms !important;
             }
 
             .tech-grid {
                 animation: none;
             }
+            
+            /* Remove all complex animations for Samsung compatibility */
+            .logo-placeholder::before,
+            .flyer-placeholder::before,
+            .whatsapp-btn::before,
+            .limited-badge::before {
+                display: none;
+            }
+        }
+
+        /* Samsung One UI Dark Mode Support */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --glass-white-strong: rgba(255, 255, 255, 0.3);
+                --text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
+            }
+        }
+
+        /* Force hardware acceleration on Samsung devices */
+        .hero-section,
+        .features-grid,
+        .whatsapp-section {
+            -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+            will-change: transform;
         }
     </style>
 </head>
@@ -959,7 +1099,7 @@
         <header class="header">
             <div class="logo-section">
                 <div class="logo-placeholder">
-                  <img src="bloomy logo.jpg" alt="Bloomy Technologies Logo" class="logo-image">
+                  <img src="bloomy logo.jpg" alt="Bloomy Technologies Logo" class="logo-image" onerror="this.style.display='none'; this.parentNode.innerHTML='<div style=\'text-align: center; color: white; text-shadow: 2px 2px 5px rgba(0,0,0,0.5);\'><i class=\'fas fa-building\' style=\'font-size: 2rem; margin-bottom: 10px; display: block;\'></i>Bloomy<br>Logo</div>';">
                 </div>
                 <h1 class="company-name">Bloomy Technologies</h1>
             </div>
@@ -967,13 +1107,13 @@
 
         <!-- IT Audit Animated Icons -->
         <div class="audit-icons">
-            <div class="audit-icon" title="Security Audit">
+            <div class="audit-icon" title="Security Audit" tabindex="0" role="button">
                 <i class="fas fa-shield-halved"></i>
             </div>
-            <div class="audit-icon" title="Compliance Check">
+            <div class="audit-icon" title="Compliance Check" tabindex="0" role="button">
                 <i class="fas fa-clipboard-check"></i>
             </div>
-            <div class="audit-icon" title="Risk Assessment">
+            <div class="audit-icon" title="Risk Assessment" tabindex="0" role="button">
                 <i class="fas fa-chart-line"></i>
             </div>
         </div>
@@ -996,9 +1136,7 @@
             <div class="flyer-container">
                 <div class="flyer-placeholder">
                     <div style="text-align: center;">
-                        <i class="fas fa-image" style="font-size: 3.5rem; margin-bottom: 20px; display: block; animation: pulse 2s infinite;"></i>
-                        <img src="it audit.jpg" alt="IT Audit Course Flyer" class="flyer-image">
-                        <small style="opacity: 0.8;">(Recommended: 500x500px)</small>
+                        <img src="it audit.jpg" alt="IT Audit Course Flyer" class="flyer-image" onerror="this.style.display='none'; this.parentNode.innerHTML='<div style=\'text-align: center; color: white; text-shadow: 2px 2px 5px rgba(0,0,0,0.5);\'><i class=\'fas fa-image\' style=\'font-size: 3.5rem; margin-bottom: 20px; display: block; animation: pulse 2s infinite;\'></i>IT Audit Course<br><small style=\'opacity: 0.8;\'>(Flyer Image)</small></div>';">
                     </div>
                 </div>
             </div>
@@ -1007,7 +1145,8 @@
         <section class="whatsapp-section">
             <a href="https://chat.whatsapp.com/D8CGFeDfSM44ALuXYsbXkn?mode=ems_wa_t" 
                class="whatsapp-btn" 
-               target="_blank">
+               target="_blank"
+               rel="noopener noreferrer">
                 <i class="fab fa-whatsapp"></i>
                 Join WhatsApp Group Now!
             </a>
@@ -1070,13 +1209,46 @@
     </div>
 
     <script>
-        // Mobile detection
+        // Samsung S21 detection and optimization
+        const isSamsung = /Samsung|SM-|GT-/i.test(navigator.userAgent);
+        const isSamsungInternet = /SamsungBrowser/i.test(navigator.userAgent);
         const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth <= 768;
+        const isHighDPI = window.devicePixelRatio > 2;
 
-        // Enhanced scroll-triggered animations with mobile optimization
+        // Samsung-specific optimizations
+        if (isSamsung || isSamsungInternet) {
+            // Disable complex animations for Samsung devices
+            document.documentElement.style.setProperty('--animation-duration', '0.2s');
+            
+            // Force hardware acceleration
+            document.body.style.webkitTransform = 'translate3d(0,0,0)';
+            document.body.style.transform = 'translate3d(0,0,0)';
+            
+            // Optimize touch scrolling
+            document.body.style.webkitOverflowScrolling = 'touch';
+            document.body.style.touchAction = 'pan-y';
+            
+            // Disable moving grid animation
+            const techGrid = document.querySelector('.tech-grid');
+            if (techGrid) {
+                techGrid.style.animation = 'none';
+                techGrid.style.backgroundSize = '25px 25px';
+            }
+            
+            // Simplify backdrop filters for performance
+            const elements = document.querySelectorAll('.feature-card, .audit-icon, .contact-info, .flyer-placeholder, .logo-placeholder, .whatsapp-btn');
+            elements.forEach(el => {
+                el.style.backdropFilter = 'blur(10px)';
+                el.style.webkitBackdropFilter = 'blur(10px)';
+                el.style.webkitTransform = 'translate3d(0,0,0)';
+                el.style.transform = 'translate3d(0,0,0)';
+            });
+        }
+
+        // Enhanced scroll-triggered animations with Samsung optimization
         const observerOptions = {
-            threshold: isMobile ? 0.05 : 0.1,
-            rootMargin: isMobile ? '0px 0px -20px 0px' : '0px 0px -50px 0px'
+            threshold: (isSamsung || isMobile) ? 0.05 : 0.1,
+            rootMargin: (isSamsung || isMobile) ? '0px 0px -10px 0px' : '0px 0px -50px 0px'
         };
 
         const observer = new IntersectionObserver((entries) => {
@@ -1092,26 +1264,24 @@
             observer.observe(card);
         });
 
-        // Advanced WhatsApp button interactions
+        // WhatsApp button interactions - Samsung optimized
         const whatsappBtn = document.querySelector('.whatsapp-btn');
         
-        whatsappBtn.addEventListener('mouseenter', () => {
-            if (!isMobile) {
+        if (!isSamsung && !isMobile) {
+            whatsappBtn.addEventListener('mouseenter', () => {
                 whatsappBtn.style.transform = 'translateY(-10px) scale(1.08)';
                 whatsappBtn.style.backgroundPosition = '100% 100%';
-            }
-        });
+            });
 
-        whatsappBtn.addEventListener('mouseleave', () => {
-            if (!isMobile) {
+            whatsappBtn.addEventListener('mouseleave', () => {
                 whatsappBtn.style.transform = 'translateY(0) scale(1)';
                 whatsappBtn.style.backgroundPosition = '0% 0%';
-            }
-        });
+            });
+        }
 
-        // Enhanced particle system (disabled on mobile for performance)
+        // Samsung-friendly particle system (disabled)
         function createAdvancedParticle(x, y) {
-            if (isMobile) return; // Skip particles on mobile
+            if (isSamsung || isMobile) return; // Skip particles on Samsung/mobile
             
             const colors = ['#25D366', '#4ECDC4', '#45B7D1', '#96CEB4'];
             const particle = document.createElement('div');
@@ -1119,65 +1289,38 @@
             particle.style.position = 'fixed';
             particle.style.left = x + 'px';
             particle.style.top = y + 'px';
-            particle.style.width = Math.random() * 8 + 4 + 'px';
+            particle.style.width = Math.random() * 6 + 3 + 'px';
             particle.style.height = particle.style.width;
             particle.style.background = colors[Math.floor(Math.random() * colors.length)];
             particle.style.borderRadius = '50%';
             particle.style.pointerEvents = 'none';
-            particle.style.boxShadow = `0 0 20px ${colors[Math.floor(Math.random() * colors.length)]}`;
-            particle.style.animation = `particleFloat ${Math.random() * 0.5 + 1}s ease-out forwards`;
+            particle.style.animation = 'particleFloat 1s ease-out forwards';
             particle.style.zIndex = '1000';
             
             document.body.appendChild(particle);
-            
-            setTimeout(() => particle.remove(), 1500);
+            setTimeout(() => particle.remove(), 1000);
         }
 
-        // Add particle CSS only if not mobile
-        if (!isMobile) {
-            const particleStyle = document.createElement('style');
-            particleStyle.textContent = `
-                @keyframes particleFloat {
-                    0% {
-                        transform: translateY(0) scale(1) rotate(0deg);
-                        opacity: 1;
-                    }
-                    100% {
-                        transform: translateY(-80px) scale(0) rotate(360deg);
-                        opacity: 0;
-                    }
-                }
-            `;
-            document.head.appendChild(particleStyle);
-
-            whatsappBtn.addEventListener('mousemove', (e) => {
-                if (Math.random() > 0.6) {
-                    const rect = whatsappBtn.getBoundingClientRect();
-                    const x = e.clientX - rect.left + rect.left;
-                    const y = e.clientY - rect.top + rect.top;
-                    createAdvancedParticle(x + (Math.random() - 0.5) * 30, y + (Math.random() - 0.5) * 30);
-                }
-            });
-        }
-
-        // Interactive audit icons with mobile-friendly interactions
+        // Interactive audit icons - Samsung optimized
         document.querySelectorAll('.audit-icon').forEach(icon => {
             const handleInteraction = (scale, bg) => {
-                icon.style.transform = `scale(${scale}) rotateY(${scale > 1 ? '180deg' : '0deg'})`;
+                if (!isSamsung) {
+                    icon.style.transform = `scale(${scale})`;
+                }
                 icon.style.background = bg;
             };
 
-            if (isMobile) {
+            if (isSamsung || isMobile) {
                 icon.addEventListener('touchstart', () => {
-                    handleInteraction(1.2, 'rgba(255, 255, 255, 0.4)');
-                });
+                    handleInteraction(1.1, 'rgba(255, 255, 255, 0.4)');
+                }, { passive: true });
                 
                 icon.addEventListener('touchend', () => {
                     handleInteraction(1, 'var(--glass-white-strong)');
-                });
+                }, { passive: true });
             } else {
                 icon.addEventListener('mouseenter', () => {
-                    handleInteraction(1.3, 'rgba(255, 255, 255, 0.3)');
+                    handleInteraction(1.2, 'rgba(255, 255, 255, 0.3)');
                 });
                 
                 icon.addEventListener('mouseleave', () => {
@@ -1186,89 +1329,108 @@
             }
         });
 
-        // Enhanced loading animations with mobile optimization
+        // Samsung-optimized loading animations
         window.addEventListener('load', () => {
             document.body.style.overflow = 'visible';
             
-            // Add staggered animations to feature cards
-            document.querySelectorAll('.feature-card').forEach((card, index) => {
-                setTimeout(() => {
-                    card.style.animation = `fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards`;
-                }, index * (isMobile ? 100 : 200));
-            });
+            if (!isSamsung) {
+                document.querySelectorAll('.feature-card').forEach((card, index) => {
+                    setTimeout(() => {
+                        card.style.animation = 'fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards';
+                    }, index * 100);
+                });
+            }
         });
 
-        // Smooth scrolling enhancement
-        document.documentElement.style.scrollBehavior = isMobile ? 'auto' : 'smooth';
-
-        // Mobile-specific performance optimizations
-        if (isMobile) {
-            // Reduce animation complexity on mobile
-            document.documentElement.style.setProperty('--animation-duration', '0.3s');
+        // Samsung-optimized scrolling
+        if (isSamsung) {
+            document.documentElement.style.scrollBehavior = 'auto';
             
-            // Optimize touch scrolling for iOS
-            document.body.style.webkitOverflowScrolling = 'touch';
-            
-            // Prevent bounce scrolling on iOS (optional)
-            document.addEventListener('touchmove', function(e) {
-                if (e.scale !== 1) { e.preventDefault(); }
-            }, { passive: false });
-
-            // Optimize background for mobile performance
-            const techGrid = document.querySelector('.tech-grid');
-            if (techGrid) {
-                techGrid.style.backgroundSize = '25px 25px';
-                techGrid.style.animation = 'none'; // Disable moving grid on mobile
-            }
+            // Prevent zoom on double tap
+            let lastTouchEnd = 0;
+            document.addEventListener('touchend', function (event) {
+                const now = (new Date()).getTime();
+                if (now - lastTouchEnd <= 300) {
+                    event.preventDefault();
+                }
+                lastTouchEnd = now;
+            }, false);
         }
 
-        // Dynamic background color shifting (reduced frequency on mobile)
-        let hue = 0;
-        const shiftInterval = isMobile ? 500 : 200;
-        setInterval(() => {
-            hue = (hue + 1) % 360;
-            document.documentElement.style.setProperty('--dynamic-hue', hue + 'deg');
-        }, shiftInterval);
-
-        // Click tracking with visual feedback
+        // Click tracking with Samsung-friendly ripple effect
         whatsappBtn.addEventListener('click', (e) => {
-            // Create ripple effect
+            if (isSamsung) return; // Skip ripple on Samsung for performance
+            
             const ripple = document.createElement('div');
             const rect = whatsappBtn.getBoundingClientRect();
             const x = e.clientX - rect.left;
             const y = e.clientY - rect.top;
             
-            ripple.style.position = 'absolute';
-            ripple.style.left = x + 'px';
-            ripple.style.top = y + 'px';
-            ripple.style.width = '0';
-            ripple.style.height = '0';
-            ripple.style.background = 'rgba(255, 255, 255, 0.5)';
-            ripple.style.borderRadius = '50%';
-            ripple.style.transform = 'translate(-50%, -50%)';
-            ripple.style.animation = 'ripple 0.6s ease-out';
+            ripple.style.cssText = `
+                position: absolute;
+                left: ${x}px;
+                top: ${y}px;
+                width: 0;
+                height: 0;
+                background: rgba(255, 255, 255, 0.5);
+                border-radius: 50%;
+                transform: translate(-50%, -50%);
+                animation: ripple 0.4s ease-out;
+                pointer-events: none;
+            `;
             
             whatsappBtn.style.position = 'relative';
             whatsappBtn.appendChild(ripple);
             
-            setTimeout(() => ripple.remove(), 600);
+            setTimeout(() => ripple.remove(), 400);
         });
 
-        // Add ripple animation
-        const rippleStyle = document.createElement('style');
-        rippleStyle.textContent = `
-            @keyframes ripple {
-                to {
-                    width: 100px;
-                    height: 100px;
-                    opacity: 0;
+        // Samsung-specific error handling
+        document.querySelectorAll('img').forEach(img => {
+            img.addEventListener('error', function() {
+                this.style.display = 'none';
+                const placeholder = this.closest('.logo-placeholder, .flyer-placeholder');
+                if (placeholder) {
+                    const isLogo = placeholder.classList.contains('logo-placeholder');
+                    placeholder.innerHTML = `<div style="text-align: center; color: white; text-shadow: 2px 2px 5px rgba(0,0,0,0.5);">
+                        <i class="fas fa-${isLogo ? 'building' : 'image'}" style="font-size: ${isLogo ? '2' : '3.5'}rem; margin-bottom: 10px; display: block;"></i>
+                        ${isLogo ? 'Bloomy<br>Logo' : 'IT Audit Course<br><small style="opacity: 0.8;">(Flyer Image)</small>'}
+                    </div>`;
                 }
+            });
+        });
+
+        // Samsung performance monitor
+        if (isSamsung && 'performance' in window) {
+            let frameCount = 0;
+            let lastTime = performance.now();
+            
+            function checkPerformance() {
+                frameCount++;
+                const currentTime = performance.now();
+                
+                if (currentTime - lastTime >= 1000) {
+                    const fps = Math.round((frameCount * 1000) / (currentTime - lastTime));
+                    
+                    if (fps < 30) {
+                        // Further reduce animations if performance is poor
+                        document.querySelectorAll('*').forEach(el => {
+                            el.style.animationDuration = '0.1s';
+                            el.style.transitionDuration = '0.1s';
+                        });
+                    }
+                    
+                    frameCount = 0;
+                    lastTime = currentTime;
+                }
+                
+                requestAnimationFrame(checkPerformance);
             }
-        `;
-        document.head.appendChild(rippleStyle);
+            
+            requestAnimationFrame(checkPerformance);
+        }
 
         // Accessibility improvements
-        // Add keyboard navigation support
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Enter' || e.key === ' ') {
                 const focused = document.activeElement;
@@ -1279,79 +1441,55 @@
             }
         });
 
-        // Add focus indicators for keyboard navigation
-        const focusStyle = document.createElement('style');
-        focusStyle.textContent = `
-            .whatsapp-btn:focus,
-            .audit-icon:focus {
-                outline: 3px solid #FFD700;
-                outline-offset: 3px;
-            }
-            
-            .feature-card:focus-within {
-                transform: translateY(-10px);
-                box-shadow: 
-                    0 20px 40px rgba(139, 92, 246, 0.5),
-                    0 0 0 3px #FFD700;
-            }
-        `;
-        document.head.appendChild(focusStyle);
-
-        // Make audit icons focusable
-        document.querySelectorAll('.audit-icon').forEach(icon => {
-            icon.setAttribute('tabindex', '0');
-            icon.setAttribute('role', 'button');
-        });
-
-        // Error handling for images
-        document.querySelectorAll('img').forEach(img => {
-            img.addEventListener('error', function() {
-                this.style.display = 'none';
-                const placeholder = this.closest('.logo-placeholder, .flyer-placeholder');
-                if (placeholder) {
-                    placeholder.innerHTML = `<div style="text-align: center; color: white; text-shadow: 2px 2px 5px rgba(0,0,0,0.5);">
-                        <i class="fas fa-image" style="font-size: 2rem; margin-bottom: 10px; display: block;"></i>
-                        Image Not Found
-                    </div>`;
+        // Samsung-specific CSS injection for final fixes
+        if (isSamsung) {
+            const samsungStyle = document.createElement('style');
+            samsungStyle.textContent = `
+                /* Samsung-specific overrides */
+                * {
+                    -webkit-tap-highlight-color: rgba(0,0,0,0);
+                    -webkit-touch-callout: none;
                 }
-            });
-        });
-
-        // Progressive enhancement for modern browsers
-        if ('IntersectionObserver' in window) {
-            // Enhanced animations for modern browsers
-            const advancedObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('animate-in');
-                    }
-                });
-            }, { threshold: 0.1 });
-
-            document.querySelectorAll('.feature-card, .contact-info').forEach(el => {
-                advancedObserver.observe(el);
-            });
+                
+                body {
+                    -webkit-text-size-adjust: 100%;
+                    -webkit-font-smoothing: antialiased;
+                }
+                
+                .feature-card:hover,
+                .audit-icon:hover,
+                .whatsapp-btn:hover {
+                    transform: none !important;
+                }
+                
+                .feature-card:active,
+                .audit-icon:active,
+                .whatsapp-btn:active {
+                    transform: scale(0.98) !important;
+                }
+                
+                /* Disable complex pseudo-elements */
+                .logo-placeholder::before,
+                .flyer-placeholder::before,
+                .whatsapp-btn::before,
+                .limited-badge::before,
+                .feature-card::before,
+                .company-name::after {
+                    display: none !important;
+                }
+            `;
+            document.head.appendChild(samsungStyle);
         }
 
-        // Add animate-in class styles
-        const animateStyle = document.createElement('style');
-        animateStyle.textContent = `
-            .animate-in {
-                animation: enhancedFadeIn 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-            }
-            
-            @keyframes enhancedFadeIn {
-                from {
-                    opacity: 0;
-                    transform: translateY(30px) rotateX(10deg);
-                }
-                to {
-                    opacity: 1;
-                    transform: translateY(0) rotateX(0deg);
-                }
-            }
-        `;
-        document.head.appendChild(animateStyle);
+        console.log('Landing page optimized for:', {
+            isSamsung,
+            isSamsungInternet,
+            isMobile,
+            isHighDPI,
+            userAgent: navigator.userAgent,
+            screenSize: `${screen.width}x${screen.height}`,
+            devicePixelRatio: window.devicePixelRatio
+        });
     </script>
 </body>
 </html>
