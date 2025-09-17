@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,13 +8,16 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
         :root {
-            --primary-purple: #8B5CF6;
+            --primary-blue: #1E40AF;
+            --primary-purple: #7C3AED;
+            --dark-blue: #1E3A8A;
             --dark-purple: #6D28D9;
+            --light-blue: #3B82F6;
             --light-purple: #A78BFA;
             --accent-purple: #C084FC;
             --pure-white: #FFFFFF;
             --off-white: #F8FAFC;
-            --purple-gradient: linear-gradient(135deg, #8B5CF6 0%, #6D28D9 50%, #5B21B6 100%);
+            --brand-gradient: linear-gradient(135deg, #1E40AF 0%, #7C3AED 50%, #6D28D9 100%);
             --glass-white-strong: rgba(255, 255, 255, 0.25);
             --text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
         }
@@ -26,15 +30,34 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background: var(--purple-gradient);
+            background: var(--brand-gradient);
             min-height: 100vh;
             overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            min-height: 100vh;
+            background:
+                radial-gradient(circle at 20% 50%, rgba(30, 64, 175, 0.15) 0%, transparent 60%),
+                radial-gradient(circle at 80% 20%, rgba(124, 58, 237, 0.15) 0%, transparent 60%),
+                radial-gradient(circle at 40% 80%, rgba(109, 40, 217, 0.15) 0%, transparent 60%);
+            z-index: -1;
+            pointer-events: none;
         }
 
         .container {
             max-width: 1400px;
             margin: 0 auto;
             padding: 20px;
+            position: relative;
+            z-index: 1;
         }
 
         .header {
@@ -66,7 +89,13 @@
             text-align: center;
             backdrop-filter: blur(8px);
             -webkit-backdrop-filter: blur(8px);
-            box-shadow: 0 8px 32px rgba(139, 92, 246, 0.4);
+            box-shadow: 0 8px 32px rgba(30, 64, 175, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .logo-placeholder:hover {
+            transform: scale(1.05);
+            box-shadow: 0 12px 40px rgba(124, 58, 237, 0.5);
         }
 
         .company-name {
@@ -74,6 +103,18 @@
             color: var(--pure-white);
             font-weight: 800;
             text-shadow: var(--text-shadow);
+            position: relative;
+        }
+
+        .company-name::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--light-blue), var(--accent-purple), transparent);
+            animation: shimmer 2s ease-in-out infinite;
         }
 
         .main-title {
@@ -115,19 +156,34 @@
             display: block;
             position: relative;
             overflow: hidden;
-            box-shadow: 0 15px 40px rgba(139, 92, 246, 0.3);
+            box-shadow: 0 15px 40px rgba(30, 64, 175, 0.3);
+        }
+
+        .course-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .course-card:hover::before {
+            left: 100%;
         }
 
         .course-card:hover {
             transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 25px 60px rgba(139, 92, 246, 0.5);
+            box-shadow: 0 25px 60px rgba(124, 58, 237, 0.5);
             background: rgba(255, 255, 255, 0.35);
         }
 
         .course-icon {
             width: 80px;
             height: 80px;
-            background: linear-gradient(45deg, var(--primary-purple), var(--accent-purple));
+            background: linear-gradient(45deg, var(--primary-blue), var(--primary-purple));
             border-radius: 20px;
             display: flex;
             align-items: center;
@@ -135,7 +191,13 @@
             margin-bottom: 25px;
             font-size: 2.5rem;
             color: white;
-            box-shadow: 0 10px 30px rgba(139, 92, 246, 0.4);
+            box-shadow: 0 10px 30px rgba(30, 64, 175, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .course-icon:hover {
+            transform: rotateY(10deg) scale(1.05);
+            box-shadow: 0 15px 35px rgba(124, 58, 237, 0.5);
         }
 
         .course-title {
@@ -164,13 +226,20 @@
             display: flex;
             align-items: center;
             gap: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .course-features li:hover {
+            transform: translateX(5px);
+            color: var(--pure-white);
         }
 
         .course-features li:before {
             content: "✓";
-            color: #4ECDC4;
+            color: #3B82F6;
             font-weight: bold;
             font-size: 1.2rem;
+            text-shadow: 0 0 10px #3B82F6;
         }
 
         .cta-button {
@@ -185,6 +254,8 @@
             gap: 10px;
             transition: all 0.3s ease;
             box-shadow: 0 10px 25px rgba(37, 211, 102, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .cta-button:hover {
@@ -197,9 +268,29 @@
             color: var(--pure-white);
             background: var(--glass-white-strong);
             backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             padding: 40px;
             border-radius: 25px;
             border: 2px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 15px 40px rgba(30, 64, 175, 0.3);
+        }
+
+        .footer p {
+            margin: 20px 0;
+            font-size: clamp(1.1rem, 3vw, 1.3rem);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            font-weight: 600;
+            text-shadow: var(--text-shadow);
+        }
+
+        .footer i {
+            padding: 8px;
+            background: linear-gradient(45deg, var(--primary-blue), var(--primary-purple));
+            border-radius: 50%;
+            box-shadow: 0 5px 15px rgba(30, 64, 175, 0.4);
         }
 
         @keyframes fadeInDown {
@@ -207,9 +298,22 @@
                 opacity: 0;
                 transform: translateY(-60px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
+            }
+        }
+
+        @keyframes shimmer {
+
+            0%,
+            100% {
+                opacity: 0.5;
+            }
+
+            50% {
+                opacity: 1;
             }
         }
 
@@ -222,23 +326,50 @@
             .course-card {
                 padding: 30px;
             }
+
+            .logo-section {
+                flex-direction: column;
+                gap: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 15px;
+            }
+
+            .course-card {
+                padding: 25px;
+            }
+
+            .course-icon {
+                width: 70px;
+                height: 70px;
+                font-size: 2rem;
+            }
+
+            .footer {
+                padding: 30px 20px;
+            }
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <header class="header">
             <div class="logo-section">
                 <div class="logo-placeholder">
-                    <img src="shared/images/bloomy logo.jpg" alt="Bloomy Technologies Logo" 
-                         style="width: 90px; height: 90px; border-radius: 20px; object-fit: contain;"
-                         onerror="this.style.display='none'; this.parentNode.innerHTML='<i class=\'fas fa-building\' style=\'font-size: 2rem;\'></i>';">
+                    <img src="shared/images/bloomy logo.jpg" alt="Bloomy Technologies Logo"
+                        style="width: 90px; height: 90px; border-radius: 20px; object-fit: contain;"
+                        onerror="this.style.display='none'; this.parentNode.innerHTML='<i class=\'fas fa-building\' style=\'font-size: 2rem;\'></i>';">
                 </div>
                 <h1 class="company-name">Bloomy Technologies</h1>
             </div>
             <h2 class="main-title">Transform Your Career with Professional Training</h2>
             <p class="subtitle">
-                Choose from our comprehensive range of technology courses designed to accelerate your career growth and expertise in high-demand fields.
+                Choose from our comprehensive range of technology courses designed to accelerate your career growth and
+                expertise in high-demand fields.
             </p>
         </header>
 
@@ -249,7 +380,8 @@
                 </div>
                 <h3 class="course-title">IT Audit & Compliance</h3>
                 <p class="course-description">
-                    Master IT audit fundamentals, compliance frameworks, and risk management for enterprise environments.
+                    Master IT audit fundamentals, compliance frameworks, and risk management for enterprise
+                    environments.
                 </p>
                 <ul class="course-features">
                     <li>SOX Compliance & COBIT Framework</li>
@@ -269,7 +401,8 @@
                 </div>
                 <h3 class="course-title">Cybersecurity Specialist</h3>
                 <p class="course-description">
-                    Comprehensive cybersecurity training covering threat detection, incident response, and security architecture.
+                    Comprehensive cybersecurity training covering threat detection, incident response, and security
+                    architecture.
                 </p>
                 <ul class="course-features">
                     <li>Ethical Hacking & Penetration Testing</li>
@@ -289,7 +422,8 @@
                 </div>
                 <h3 class="course-title">Data Analysis & Science</h3>
                 <p class="course-description">
-                    Transform data into insights with advanced analytics, machine learning, and business intelligence tools.
+                    Transform data into insights with advanced analytics, machine learning, and business intelligence
+                    tools.
                 </p>
                 <ul class="course-features">
                     <li>Python & R Programming</li>
@@ -325,15 +459,20 @@
         </section>
 
         <footer class="footer">
-            <p style="margin: 20px 0; font-size: 1.3rem; display: flex; align-items: center; justify-content: center; gap: 15px;">
-                <i class="fas fa-phone" style="padding: 8px; background: linear-gradient(45deg, var(--primary-purple), var(--accent-purple)); border-radius: 50%;"></i>
+            <p
+                style="margin: 20px 0; font-size: 1.3rem; display: flex; align-items: center; justify-content: center; gap: 15px;">
+                <i class="fas fa-phone"
+                    style="padding: 8px; background: linear-gradient(45deg, var(--primary-purple), var(--accent-purple)); border-radius: 50%;"></i>
                 +1 (502) 650-6210
             </p>
-            <p style="margin: 20px 0; font-size: 1.3rem; display: flex; align-items: center; justify-content: center; gap: 15px;">
-                <i class="fas fa-globe" style="padding: 8px; background: linear-gradient(45deg, var(--primary-purple), var(--accent-purple)); border-radius: 50%;"></i>
+            <p
+                style="margin: 20px 0; font-size: 1.3rem; display: flex; align-items: center; justify-content: center; gap: 15px;">
+                <i class="fas fa-globe"
+                    style="padding: 8px; background: linear-gradient(45deg, var(--primary-purple), var(--accent-purple)); border-radius: 50%;"></i>
                 www.bloomy-technologies.com
             </p>
         </footer>
     </div>
 </body>
+
 </html>
